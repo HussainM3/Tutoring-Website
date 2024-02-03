@@ -1,5 +1,6 @@
 
 import React from "react";
+import "./MathUnit.css";
 
 /**
  * MathUnit component for a math unit in a specific grade
@@ -11,7 +12,7 @@ import React from "react";
 function MathUnit(props){
     return(
         // display info on the units
-        <div>
+        <div className="math-unit">
             <h2> {props.grade}: {props.title}</h2>
             {/* Will add more content specific to the unit here */}
         </div>
