@@ -15,14 +15,20 @@ function App() {
 
   return (
     <div>
-      <Header />
-      {/* Display math units in array, map funciton iterates over the array, rendering a math unit component for each unit*/}
-      {/* So it takes the mathUnits array, maps each unit to create a MathUnit component with the props for the current unit */}
-      {mathUnits.map((unit, index) => 
-        (<MathUnit key = {index} grade = {unit.grade} title = {unit.title} /> ))} 
-      {/* components will continue to go here */}
+      <TitleBar />
+      <div className='content-container'>
+        <Sidebar />
+        <div className='main-content'>
+          <Header />
+          {/* Display math units in array, map funciton iterates over the array, rendering a math unit component for each unit*/}
+          {/* So it takes the mathUnits array, maps each unit to create a MathUnit component with the props for the current unit */}
+          {mathUnits.map((unit, index) => 
+            (<MathUnit key = {index} grade = {unit.grade} title = {unit.title} /> ))} 
+          {/* components will continue to go here */}
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
