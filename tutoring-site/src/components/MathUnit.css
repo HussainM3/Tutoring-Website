@@ -1,0 +1,13 @@
+
+.math-unit{
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.math-unit h2{
+    margin-bottom: 5px;
+    color: #333;
+}
