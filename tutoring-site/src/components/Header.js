@@ -1,5 +1,6 @@
 import React from "react";
 
+// header component
 const Header = () => {
     return(
         <div>
@@ -7,3 +8,6 @@ const Header = () => {
         </div>
     );
 };
+
+// export component to be imported in App.js
+export default Header
