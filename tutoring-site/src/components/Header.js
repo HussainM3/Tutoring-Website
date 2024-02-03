@@ -3,9 +3,9 @@ import React from "react";
 // header component
 const Header = () => {
     return(
-        <div>
+        <header>
             <h1>Math Tutoring Service</h1>
-        </div>
+        </header>
     );
 };
 
