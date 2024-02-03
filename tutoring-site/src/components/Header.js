@@ -1,6 +1,6 @@
 import React from "react";
 
-// header component
+// header component to represent the header of the site
 const Header = () => {
     return(
         <header>
