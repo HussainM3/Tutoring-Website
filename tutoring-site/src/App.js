@@ -6,6 +6,7 @@ import Header from './components/Header';
 import MathUnit from './components/MathUnit';
 import TitleBar from './components/TitleBar';
 import Sidebar from './components/Sidebar';
+import Footer from './components/Footer';
 
 // import css file
 import './App.css'
@@ -32,6 +33,7 @@ function App() {
           {/* components will continue to go here */}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
