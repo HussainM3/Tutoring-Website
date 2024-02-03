@@ -4,6 +4,11 @@ import React from 'react';
 // import components
 import Header from './components/Header';
 import MathUnit from './components/MathUnit';
+import TitleBar from './components/TitleBar';
+import Sidebar from './components/Sidebar';
+
+// import css file
+import './App.css'
 
 function App() {
   // sample array of math units

@@ -1,0 +1,9 @@
+/* css file for styling upper level things of website */
+.content-container{
+  display: flex;
+}
+
+.main-content{
+  flex: 1;
+  padding: 20px;
+}
