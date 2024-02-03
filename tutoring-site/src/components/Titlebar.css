@@ -1,0 +1,8 @@
+/* CSS File for title bar  */
+
+.title-bar {
+    background-color: #1794e8;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
