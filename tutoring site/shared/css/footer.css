@@ -1,0 +1,22 @@
+.site-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #001882; 
+    border-bottom: 1px solid #ccc;
+}
+
+.logo {
+    height: 40px; 
+}
+
+.cover-link {
+    text-decoration: none;
+    font-weight: bold;
+    color: #fbfbfb; 
+}
+
+.cover-link:hover {
+    text-decoration: underline;
+}

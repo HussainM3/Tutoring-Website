@@ -1,0 +1,279 @@
+body {
+    background: linear-gradient(to right, #e7e8eb, #dceefb);
+    background-repeat: round;
+    background-size: cover;
+    color: black;
+    margin: 2em;
+    height: 100vh; /* vh (viewport height) is relative to browser window. % is relative to parent element3*/
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.content-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.intro {
+    margin-bottom: 5vh;
+}
+
+.intro img {
+    margin-top: 2rem;
+}
+
+#title {
+    font-size: 3rem;
+}
+
+.subtitle {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #007B7F;
+}
+
+
+.information{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;    /* center horizontally */
+    gap: 2rem;                  /* spacing vertically */
+    /* Below are for fade in transition */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 2s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+}
+
+.information.visible { /* Also for fade in transition */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.information img {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.information > div {
+    flex: 1 0 calc(100% / 3);
+    box-sizing: border-box;
+}
+
+.information-text {
+    padding: 20px;
+    line-height: 1.5rem;
+    text-align: left;
+}
+
+/* .information-text:hover {
+    background-color: #e6f1f8;
+    transform: scale(1.01);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+} */
+
+.information-text h2 {
+    color: #003366;
+    font-size: 2rem;
+    line-height: 2rem;
+}
+
+.information-text h3 {
+    color: #006400;
+}
+
+.profile-image img {
+    width: 300px;        
+    height: 300px;
+    object-fit: cover;          /* keep image proportional */
+    border-radius: 50%;         /* this makes a circle */
+    border: 3px solid white;  
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.parts-grid {
+    gap: 1rem;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal-width columns - fr means fractional unit */
+}
+
+.parts-grid > div { /* divs inside the grid container */
+    padding: 1rem;
+    border: 3px solid black;
+    color: navy;
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+    transition: opacity 0.3s ease;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#part1 { 
+    background-color: #ffffff;
+    background-image: url("../images/bookmark-logo.png");
+    background-size: 120px auto;
+    background-repeat: no-repeat; /* no tiling */
+    background-position: bottom right;
+    width: 35rem;
+    height: 30rem;
+}
+
+#part1:hover { 
+    opacity: 50%;
+}
+
+#part2 { 
+    background-color: #ffffff;
+    background-image: url("../images/learn-system-logo.png");
+    background-size: 100px auto;
+    background-repeat: no-repeat; /* no tiling */
+    background-position: bottom right;
+    width: 35rem;
+    height: 30rem;
+}
+ 
+#part2:hover { 
+    opacity: 50%;
+}
+
+#part2-logo {
+    width: 10rem;
+    height: 10rem;
+}
+
+.loginSignUp{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.buttons {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    margin: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.buttons:hover {
+    background-color: #0d47a1;
+}
+
+.code {
+    background-color: #e3f2fd; 
+    color: #0d47a1;            
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.95em;
+    font-family: "Fira Code", "Source Code Pro", "Segoe UI", sans-serif;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.code a {
+    color: #1565c0;
+    text-decoration: underline;
+}
+
+#extraField {
+    margin-top: 10px;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+    max-width: 600px;
+    text-align: center;
+}
+
+.message-error {
+    color: #d8000c;
+    background-color: #ffd2d2;
+    border: 1px solid #d8000c;
+}
+
+.message-success {
+    color: #270;
+    background-color: #dff2bf;
+    border: 1px solid #270;
+}
+
+#quizContent {
+    text-align: left;
+}
+
+/* --- Part 1 --- */
+
+.edit-btn, .delete-btn {
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background-image: url("../images/edit.png");
+}
+
+.delete-btn {
+    background-image: url("../images/delete.png");
+}
+
+#part1-logo {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+input[type="text"], input[type="password"] {
+    padding: 10px;
+    border: 2px solid #1976d2;
+    border-radius: 6px;
+    font-size: 16px;
+    margin: 5px;
+    width: 250px;
+}
+
+#topTenBookmarks {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+#topTenBookmarks li {
+    margin: 10px 0;
+    padding: 10px 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content:space-between
+}
+
+#topTenBookmarks a {
+    color: #1976d2;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#topTenBookmarks a:hover {
+    text-decoration: underline;
+}
+
