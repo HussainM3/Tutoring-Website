@@ -1,19 +1,29 @@
-// scroll fade in affect
 document.addEventListener("DOMContentLoaded", () => {
-    // variable detect when information fade in sections enter viewport
-    var observer = new IntersectionObserver((entries) => { 
-        entries.forEach(entry => {
+    const navToggle = document.querySelector(".nav-toggle");
+    const nav = document.querySelector("#site-nav");
+
+    if (navToggle && nav) {
+        navToggle.addEventListener("click", () => {
+            const isOpen = nav.classList.toggle("open");
+            navToggle.setAttribute("aria-expanded", String(isOpen));
+        });
+    }
+
+    const sections = document.querySelectorAll(".information");
+
+    if (!("IntersectionObserver" in window)) {
+        sections.forEach((section) => section.classList.add("visible"));
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                entry.target.classList.add("visible"); // add visible class to information section
-                observer.unobserve(entry.target); // only fade in once
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
             }
         });
-    }, {
-        threshold: 0.2 // make effect happen when 20% of section is visible
-    });
+    }, { threshold: 0.16 });
 
-    // get all information section and add transition to them
-    document.querySelectorAll('.information').forEach(section => {
-        observer.observe(section);
-    });
+    sections.forEach((section) => observer.observe(section));
 });
