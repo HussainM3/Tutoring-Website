@@ -75,14 +75,14 @@ include __DIR__ . '/shared/header.php';
             <div class="field">
                 <label for="name">Name</label>
                 <input id="name" name="name" type="text" value="<?php echo htmlspecialchars($values['name']); ?>" autocomplete="name" required>
-                <?php if (isset($errors['name'])): ?><span class="field-error"><?php echo $errors['name']; ?></span><?php endif; ?>
+                <span class="field-error" style="display: <?php echo isset($errors['name']) ? 'block' : 'none'; ?>;"><?php echo $errors['name'] ?? ''; ?></span>
             </div>
 
             <div class="field-grid">
                 <div class="field">
                     <label for="email">Email</label>
                     <input id="email" name="email" type="email" value="<?php echo htmlspecialchars($values['email']); ?>" autocomplete="email" required>
-                    <?php if (isset($errors['email'])): ?><span class="field-error"><?php echo $errors['email']; ?></span><?php endif; ?>
+                    <span class="field-error" style="display: <?php echo isset($errors['email']) ? 'block' : 'none'; ?>;"><?php echo $errors['email'] ?? ''; ?></span>
                 </div>
                 <div class="field">
                     <label for="phone">Phone</label>
@@ -103,14 +103,85 @@ include __DIR__ . '/shared/header.php';
             </div>
 
             <div class="field">
-                <label for="message">What kind of support is needed?</label>
+                <label for="message">How can we help you?</label>
                 <textarea id="message" name="message" rows="6" required><?php echo htmlspecialchars($values['message']); ?></textarea>
-                <?php if (isset($errors['message'])): ?><span class="field-error"><?php echo $errors['message']; ?></span><?php endif; ?>
+                <span class="field-error" style="display: <?php echo isset($errors['message']) ? 'block' : 'none'; ?>;"><?php echo $errors['message'] ?? ''; ?></span>
             </div>
 
-            <button class="button primary" type="submit">Prepare Message</button>
+            <button class="button primary" type="submit">Send Email</button>
         </form>
+
+        <!-- Custom Confirmation Modal -->
+        <div id="confirm-modal" class="modal">
+            <div class="modal-content">
+                <h3>Confirm Email Send</h3>
+                <p>Are you sure you want to send this email?</p>
+                <button id="confirm-yes" class="button primary">Yes, Prepare email</button>
+                <button id="confirm-no" class="button secondary">Cancel</button>
+            </div>
+        </div>
     </section>
 </main>
+
+<script>
+var siteEmail = '<?php echo htmlspecialchars($site['email']); ?>';
+
+document.querySelector('.contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Clear previous errors
+    document.querySelectorAll('.field-error').forEach(el => {
+        el.style.display = 'none';
+        el.textContent = '';
+    });
+    
+    var name = document.getElementById('name').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var message = document.getElementById('message').value.trim();
+    
+    var errors = {};
+    
+    if (name === '') {
+        errors.name = 'Please enter your name.';
+    }
+    
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errors.email = 'Please enter a valid email address.';
+    }
+    
+    if (message === '') {
+        errors.message = 'Please share a few details about the tutoring support needed.';
+    }
+    
+    if (Object.keys(errors).length > 0) {
+        for (var key in errors) {
+            var errorSpan = document.querySelector('#' + key + ' ~ .field-error');
+            if (errorSpan) {
+                errorSpan.textContent = errors[key];
+                errorSpan.style.display = 'block';
+            }
+        }
+        return;
+    }
+    
+    // If valid, show custom confirmation modal
+    document.getElementById('confirm-modal').style.display = 'flex';
+});
+
+// Handle modal buttons
+document.getElementById('confirm-yes').addEventListener('click', function() {
+    var name = document.getElementById('name').value.trim();
+    var message = document.getElementById('message').value.trim();
+    var subject = 'Tutoring Inquiry from ' + name + ' - Student level: ' + document.getElementById('student_level').value;
+    var body = message + '\n\nContact details:\nEmail: ' + document.getElementById('email').value.trim() + '\nPhone: ' + document.getElementById('phone').value.trim();
+    var mailto = 'mailto:' + siteEmail + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    window.location.href = mailto;
+    document.getElementById('confirm-modal').style.display = 'none';
+});
+
+document.getElementById('confirm-no').addEventListener('click', function() {
+    document.getElementById('confirm-modal').style.display = 'none';
+});
+</script>
 
 <?php include __DIR__ . '/shared/footer.php'; ?>
