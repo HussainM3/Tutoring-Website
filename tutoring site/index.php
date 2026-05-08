@@ -26,13 +26,11 @@ include __DIR__ . '/shared/header.php';
         </div>
 
         <div class="hero-visual" aria-label="Student math tutoring illustration">
-            <div class="photo-stack">
-                <div class="photo-circle photo-circle--primary">
-                    <span>Image 1</span>
-                </div>
-                <div class="photo-circle photo-circle--secondary">
-                    <span>Image 2</span>
-                </div>
+            <div class="photo-circle photo-circle--primary">
+                <img src="shared/images/Tutor_Question.png" alt="Illustration of students raising their hands in a classroom">
+            </div>
+            <div class="photo-circle photo-circle--secondary">
+                <img src="shared/images/Tutor_Clipart.png" alt="Illustration of a tutor and student working together">
             </div>
         </div>
     </section>

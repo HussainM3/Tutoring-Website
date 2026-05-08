@@ -182,21 +182,14 @@ cite {
 
 .hero-visual {
     position: relative;
-    width: min(520px, 100%);
-    min-height: 460px;
+    width: min(1000px, 100%);
+    height: 460px;
     margin: 0;
-    justify-self: center;
-}
-
-.photo-stack {
-    position: relative;
-    width: 100%;
-    height: 100%;
+    top: -8rem;
 }
 
 .photo-circle {
     position: absolute;
-    width: min(320px, 58vw);
     aspect-ratio: 1;
     border-radius: 999px;
     display: grid;
@@ -211,24 +204,26 @@ cite {
 }
 
 .photo-circle--primary {
-    top: 10%;
+    top: 8%;
     left: 0;
-    width: min(320px, 58vw);
+    width: min(58vw, 620px);
     z-index: 0;
     box-shadow: 0 30px 60px rgba(47, 47, 49, 0.08);
 }
 
 .photo-circle--secondary {
-    top: 24%;
-    right: 0;
-    width: min(240px, 42vw);
+    top: 12%;
+    left: 50%;
+    width: min(42vw, 440px);
     z-index: 1;
     box-shadow: 0 20px 40px rgba(47, 47, 49, 0.1);
 }
 
-.photo-circle span {
-    display: block;
-    max-width: 10rem;
+.photo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
 }
 
 .section {
