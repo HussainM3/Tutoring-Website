@@ -32,6 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['message'] = 'Please share a few details about the tutoring support needed.';
     }
 
+    if ($values['phone'] === '' || !preg_match('/^\+?[0-9\s\-()]+$/', $values['phone'])) {
+        $errors['phone'] = 'Please enter a valid phone number.';
+    }
+
     $submitted = count($errors) === 0;
 }
 
@@ -62,15 +66,9 @@ include __DIR__ . '/shared/header.php';
         </aside>
 
         <form class="contact-form information" method="post" action="contact.php" novalidate>
-            <?php if ($submitted): ?>
-                <div class="form-status success" role="status">
-                    Thank you, <?php echo htmlspecialchars($values['name']); ?>. Your message is ready to send. Please email
-                    <a href="mailto:<?php echo htmlspecialchars($site['email']); ?>?subject=Tutoring%20Inquiry&body=<?php echo rawurlencode($values['message']); ?>">
-                        <?php echo htmlspecialchars($site['email']); ?>
-                    </a>
-                    or call <?php echo htmlspecialchars($site['phone']); ?> to confirm details.
-                </div>
-            <?php endif; ?>
+            <div id="success-message" class="form-status success" role="status" style="display: none;">
+                Email sent successfully! Your default email application is opening.
+            </div>
 
             <div class="field">
                 <label for="name">Name</label>
@@ -87,6 +85,7 @@ include __DIR__ . '/shared/header.php';
                 <div class="field">
                     <label for="phone">Phone</label>
                     <input id="phone" name="phone" type="tel" value="<?php echo htmlspecialchars($values['phone']); ?>" autocomplete="tel">
+                    <span class="field-error" style="display: <?php echo isset($errors['phone']) ? 'block' : 'none'; ?>;"><?php echo $errors['phone'] ?? ''; ?></span>
                 </div>
             </div>
 
@@ -100,6 +99,7 @@ include __DIR__ . '/shared/header.php';
                         </option>
                     <?php endforeach; ?>
                 </select>
+                <span class="field-error" style="display: none;"></span>
             </div>
 
             <div class="field">
@@ -109,6 +109,9 @@ include __DIR__ . '/shared/header.php';
             </div>
 
             <button class="button primary" type="submit">Send Email</button>
+            <div id="success-message" class="form-status success" role="status" style="display: none; margin-top: 1rem;">
+                Email sent successfully.
+            </div>
         </form>
 
         <!-- Custom Confirmation Modal -->
@@ -129,15 +132,18 @@ var siteEmail = '<?php echo htmlspecialchars($site['email']); ?>';
 document.querySelector('.contact-form').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Clear previous errors
+    // Clear previous errors and any previous success message
     document.querySelectorAll('.field-error').forEach(el => {
         el.style.display = 'none';
         el.textContent = '';
     });
+    document.getElementById('success-message').style.display = 'none';
     
     var name = document.getElementById('name').value.trim();
     var email = document.getElementById('email').value.trim();
     var message = document.getElementById('message').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    var studentLevel = document.getElementById('student_level').value.trim();
     
     var errors = {};
     
@@ -151,6 +157,16 @@ document.querySelector('.contact-form').addEventListener('submit', function(e) {
     
     if (message === '') {
         errors.message = 'Please share a few details about the tutoring support needed.';
+    }
+    
+    if (studentLevel === '') {
+        errors.student_level = 'Please select a student level.';
+    }
+    
+    if (phone === '') {
+        errors.phone = 'Please enter your phone number.';
+    } else if (!/^\+?[0-9\s\-()]+$/.test(phone)) {
+        errors.phone = 'Please enter a valid phone number.';
     }
     
     if (Object.keys(errors).length > 0) {
@@ -175,8 +191,21 @@ document.getElementById('confirm-yes').addEventListener('click', function() {
     var subject = 'Tutoring Inquiry from ' + name + ' - Student level: ' + document.getElementById('student_level').value;
     var body = message + '\n\nContact details:\nEmail: ' + document.getElementById('email').value.trim() + '\nPhone: ' + document.getElementById('phone').value.trim();
     var mailto = 'mailto:' + siteEmail + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-    window.location.href = mailto;
+    
+    // Show success message
+    var successMessage = document.getElementById('success-message');
+    successMessage.style.display = 'block';
+    
+    // Hide modal
     document.getElementById('confirm-modal').style.display = 'none';
+    
+    // Open email client
+    window.location.href = mailto;
+    
+    // Hide success message after 15 seconds
+    setTimeout(function() {
+        successMessage.style.display = 'none';
+    }, 15000);
 });
 
 document.getElementById('confirm-no').addEventListener('click', function() {
