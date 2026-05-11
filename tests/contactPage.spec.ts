@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('email form validation', async ({ page }) => {
+test('form validation', async ({ page }) => {
     await page.goto('http://localhost:8000/contact.php');
 
     // 1. Validation Check
