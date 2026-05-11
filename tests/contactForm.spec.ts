@@ -3,8 +3,9 @@ import { test, expect } from '@playwright/test';
 test('email form validation', async ({ page }) => {
     await page.goto('http://localhost:8000/contact.php');
 
-    // Try submitting the form without filling it out
-    await page.click('button:has-text("Send Email")');
+    // 1. Validation Check
+    await page.getByRole('button', { name: 'Send Email' }).click();
+
     // Check for validation error messages
     await expect(page.getByText('Please enter your name.')).toBeVisible();
     await expect(page.getByText('Please enter a valid email address.')).toBeVisible();
@@ -13,15 +14,15 @@ test('email form validation', async ({ page }) => {
     await expect(page.getByText('Please enter your phone number.')).toBeVisible();
 
     // Fill out the form with valid data
-    await page.fill('input[id="name"]', 'Test User');
-    await page.fill('input[id="email"]', 'test@example.com');
-    await page.fill('input[id="phone"]', '123-456-7890');
-    await page.selectOption('select[id="student_level"]', 'High school algebra, functions, and exam prep');
-    await page.fill('textarea[id="message"]', 'This is a test message.');
-    await page.click('button:has-text("Send Email")');
+    await page.getByLabel('Name').fill('Test User');
+    await page.getByLabel('Email').fill('test@example.com');
+    await page.getByLabel('Phone').fill('123-456-7890');
+    await page.getByLabel('Student Level').selectOption('High school algebra, functions, and exam prep');
+    await page.getByLabel('How can we help you?').fill('This is a test message.');
+    await page.getByRole('button', { name: 'Send Email' }).click();
 
     // click yes on confirmation dialog (modal)
-    await page.click('button:has-text("Yes")');
+    await page.getByRole('button', { name: 'Yes' }).click();
 
     // Check for success message or redirection
     await expect(page.getByText('Email sent successfully!')).toBeVisible();

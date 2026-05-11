@@ -109,9 +109,6 @@ include __DIR__ . '/shared/header.php';
             </div>
 
             <button class="button primary" type="submit">Send Email</button>
-            <div id="success-message" class="form-status success" role="status" style="display: none; margin-top: 1rem;">
-                Email sent successfully.
-            </div>
         </form>
 
         <!-- Custom Confirmation Modal -->
@@ -200,6 +197,9 @@ document.getElementById('confirm-yes').addEventListener('click', function() {
     document.getElementById('confirm-modal').style.display = 'none';
     
     // Open email client
+    // this may not work in all browsers as default mailto behavior can be blocked, and can be improved
+    // by using a server-side email sending solution instead of mailto links, but this is a simple approach for now
+    // Testing may also require handling the mailto behavior differently, as it can be tricky to test reliably in automated tests
     window.location.href = mailto;
     
     // Hide success message after 15 seconds
