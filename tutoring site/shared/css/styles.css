@@ -168,11 +168,43 @@ h3 {
 
 blockquote {
     margin: 0;
-    padding-left: 1rem;
+    padding: 1.5rem 1.5rem 1.25rem;
     border-left: 4px solid var(--orange);
-    color: #3d4146;
+    background: rgba(255, 243, 230, 0.75);
+    color: #2f3236;
     font-size: 1.1rem;
-    font-weight: 750;
+    font-weight: 600;
+    position: relative;
+}
+
+blockquote:before {
+    content: '\201C';
+    position: absolute;
+    top: 0.25rem;
+    left: 1rem;
+    font-size: 3rem;
+    line-height: 1;
+    color: rgba(245, 159, 51, 0.3);
+}
+
+blockquote p {
+    margin: 0;
+    padding-left: 0.75rem;
+}
+
+blockquote footer {
+    margin-top: 1rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-style: normal;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+blockquote footer strong {
+    color: #2f3236;
+    font-weight: 700;
 }
 
 cite {
@@ -181,6 +213,17 @@ cite {
     color: var(--muted);
     font-size: 0.95rem;
     font-style: normal;
+}
+
+.testimonial-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.testimonial-card.information {
+    padding: 0;
+    background: transparent;
+    border: none;
 }
 
 .hero-visual {

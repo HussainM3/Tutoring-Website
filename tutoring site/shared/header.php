@@ -35,6 +35,7 @@ require_once __DIR__ . '/site-data.php';
             <a class="<?php echo $currentPage === 'home' ? 'active' : ''; ?>" href="<?php echo $basePath; ?>index.php">Home</a>
             <a class="<?php echo $currentPage === 'curriculum' ? 'active' : ''; ?>" href="<?php echo $basePath; ?>curriculum/">Curriculum</a>
             <a class="<?php echo $currentPage === 'contact' ? 'active' : ''; ?>" href="<?php echo $basePath; ?>contact.php">Contact</a>
+            <a class="<?php echo $currentPage === 'feedback' ? 'active' : ''; ?>" href="<?php echo $basePath; ?>feedback.php">Feedback</a>
             <a class="nav-cta" href="<?php echo $basePath; ?>contact.php">Book a Call</a>
         </nav>
     </header>

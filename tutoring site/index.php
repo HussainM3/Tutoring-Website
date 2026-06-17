@@ -4,6 +4,7 @@ $currentPage = 'home';
 $basePath = '';
 require_once __DIR__ . '/shared/site-data.php';
 require_once __DIR__ . '/shared/icons.php';
+require_once __DIR__ . '/shared/testimonials-data.php';
 include __DIR__ . '/shared/header.php';
 ?>
 
@@ -75,6 +76,30 @@ include __DIR__ . '/shared/header.php';
                         <p><?php echo htmlspecialchars($item['description']); ?></p>
                     </div>
                 </article>
+            <?php endforeach; ?>
+        </div>
+    </section>
+
+    <section class="testimonials-section section">
+        <div class="section-heading">
+            <p class="eyebrow">What families say</p>
+            <h2>Trusted results from students and families.</h2>
+        </div>
+        <div class="testimonial-grid">
+            <?php foreach ($testimonials as $testimonial): ?>
+                <?php if (!empty($testimonial['featured'])): ?>
+                    <article class="testimonial-card information">
+                        <blockquote>
+                            <p><?php echo htmlspecialchars($testimonial['text']); ?></p>
+                            <footer>
+                                <strong><?php echo htmlspecialchars($testimonial['name']); ?></strong>
+                                <?php if (!empty($testimonial['grade'])): ?>
+                                    <span><?php echo htmlspecialchars($testimonial['grade']); ?></span>
+                                <?php endif; ?>
+                            </footer>
+                        </blockquote>
+                    </article>
+                <?php endif; ?>
             <?php endforeach; ?>
         </div>
     </section>
