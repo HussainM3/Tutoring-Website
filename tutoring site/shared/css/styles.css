@@ -6,6 +6,9 @@
     --mint-soft: #e4f8f3;
     --teal: #0bbf9f;
     --orange: #f28b42;
+    --sun: #f6c453;
+    --sky: #5aa9e6;
+    --rose: #df6f7f;
     --line: #dfe7e5;
     --shadow: 0 22px 60px rgba(47, 47, 49, 0.12);
 }
@@ -391,9 +394,264 @@ svg {
     padding-bottom: clamp(4rem, 8vw, 6rem);
 }
 
+.curriculum-page,
+.contact-page {
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 250, 245, 0.88) 42%, var(--paper) 100%),
+        linear-gradient(90deg, rgba(168, 234, 220, 0.26), rgba(246, 196, 83, 0.18), rgba(90, 169, 230, 0.16));
+}
+
+.curriculum-hero {
+    position: relative;
+    padding-top: clamp(2.25rem, 5vw, 4rem);
+    padding-bottom: clamp(1.25rem, 3vw, 2rem);
+}
+
+.curriculum-hero::after,
+.contact-hero::after {
+    content: "";
+    display: block;
+    width: min(360px, 100%);
+    height: 8px;
+    margin-top: 1.35rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--teal), var(--sun), var(--orange), var(--sky));
+}
+
+.curriculum-hero h1 {
+    font-size: clamp(2.75rem, 6vw, 5rem);
+}
+
+.curriculum-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+}
+
+.curriculum-hero-actions .button.secondary:first-child {
+    border-color: var(--teal);
+    background: #f3fffc;
+}
+
+.curriculum-hero-actions .button.secondary:last-child {
+    border-color: var(--orange);
+    background: #fff8f2;
+}
+
+.roadmap-section {
+    width: min(1120px, calc(100% - 2rem));
+    margin-inline: auto;
+}
+
+.roadmap-section {
+    display: grid;
+    gap: 1rem;
+    padding-bottom: clamp(4rem, 8vw, 6rem);
+}
+
+.roadmap-grade,
+.roadmap-strand {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+}
+
+.roadmap-grade {
+    border-top: 5px solid var(--teal);
+    box-shadow: 0 12px 34px rgba(47, 47, 49, 0.08);
+}
+
+.roadmap-grade:nth-of-type(3n + 2) {
+    border-top-color: var(--orange);
+}
+
+.roadmap-grade:nth-of-type(3n) {
+    border-top-color: var(--sky);
+}
+
+.roadmap-grade > summary,
+.roadmap-strand > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    cursor: pointer;
+    list-style: none;
+}
+
+.roadmap-grade > summary::-webkit-details-marker,
+.roadmap-strand > summary::-webkit-details-marker {
+    display: none;
+}
+
+.roadmap-grade > summary::after,
+.roadmap-strand > summary::after {
+    content: "+";
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: var(--mint-soft);
+    color: #087c69;
+    font-weight: 900;
+}
+
+.roadmap-grade[open] > summary::after,
+.roadmap-strand[open] > summary::after {
+    content: "-";
+}
+
+.roadmap-grade > summary {
+    background: linear-gradient(90deg, #ffffff 0%, rgba(228, 248, 243, 0.72) 100%);
+    padding: clamp(1rem, 2vw, 1.4rem);
+}
+
+.grade-summary-text {
+    display: grid;
+    gap: 0.35rem;
+}
+
+.grade-title {
+    font-size: clamp(1.45rem, 2.5vw, 2.1rem);
+    font-weight: 900;
+    line-height: 1.05;
+}
+
+.grade-focus {
+    color: var(--muted);
+    font-weight: 650;
+}
+
+.grade-content {
+    padding: 0 clamp(1rem, 2vw, 1.4rem) clamp(1rem, 2vw, 1.4rem);
+}
+
+.curriculum-source {
+    display: inline-flex;
+    margin-bottom: 1rem;
+    color: #087c69;
+    font-weight: 800;
+}
+
+.strand-list {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.roadmap-strand > summary {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), rgba(251, 251, 250, 0.72));
+    padding: 0.9rem 1rem;
+    color: #243330;
+    font-weight: 900;
+}
+
+.roadmap-strand {
+    --strand: var(--teal);
+    border-left: 5px solid var(--strand);
+}
+
+.roadmap-strand > summary::after {
+    background: color-mix(in srgb, var(--strand) 18%, white);
+    color: color-mix(in srgb, var(--strand) 72%, #1f2428);
+}
+
+.strand-number {
+    --strand: var(--teal);
+}
+
+.strand-algebra {
+    --strand: var(--orange);
+}
+
+.strand-data {
+    --strand: var(--sky);
+}
+
+.strand-spatial-sense {
+    --strand: var(--sun);
+}
+
+.strand-financial-literacy {
+    --strand: var(--rose);
+}
+
+.topic-count {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 750;
+}
+
+.topic-list {
+    border-top: 1px solid var(--line);
+}
+
+.topic-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 0.34fr);
+    gap: 1rem;
+    padding: 1rem;
+    border-top: 1px solid rgba(223, 231, 229, 0.72);
+}
+
+.topic-row:first-child {
+    border-top: 0;
+}
+
+.topic-row:hover {
+    background: rgba(228, 248, 243, 0.34);
+}
+
+.topic-copy h3 {
+    font-size: 1.05rem;
+}
+
+.topic-copy p {
+    margin: 0.35rem 0 0;
+    color: var(--muted);
+}
+
+.topic-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+}
+
+.topic-links a {
+    padding: 0.18rem 0.35rem;
+    border-radius: 6px;
+    background: #f4fffb;
+    color: #087c69;
+    font-weight: 800;
+}
+
+.contact-hero {
+    padding-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.contact-page .contact-layout {
+    padding-top: 0.5rem;
+}
+
 .contact-card,
 .contact-form {
     padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.contact-page .contact-card {
+    border: 1px solid rgba(11, 191, 159, 0.28);
+    border-top: 5px solid var(--teal);
+    background: linear-gradient(180deg, #ffffff, #f3fffc);
+}
+
+.contact-page .contact-form {
+    border: 1px solid rgba(242, 139, 66, 0.24);
+    border-top: 5px solid var(--orange);
+    background: linear-gradient(180deg, #ffffff, #fff9f3);
 }
 
 .contact-card {
@@ -410,8 +668,15 @@ svg {
 
 .contact-card a {
     margin: 0.85rem 0;
+    padding: 0.65rem 0.75rem;
+    border-radius: 8px;
+    background: #eafaf6;
     color: #203431;
     font-weight: 800;
+}
+
+.contact-card a:nth-of-type(2) {
+    background: #fff2e8;
 }
 
 .contact-form {
@@ -506,6 +771,10 @@ textarea:focus {
     .service-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .topic-row {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 680px) {
@@ -535,6 +804,15 @@ textarea:focus {
         min-height: 330px;
         transform: scale(0.86);
         transform-origin: center top;
+    }
+
+    .roadmap-grade > summary,
+    .roadmap-strand > summary {
+        align-items: flex-start;
+    }
+
+    .topic-count {
+        display: none;
     }
 }
 

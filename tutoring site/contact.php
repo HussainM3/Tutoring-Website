@@ -42,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 include __DIR__ . '/shared/header.php';
 ?>
 
-<main>
-    <section class="page-hero">
+<main class="contact-page">
+    <section class="page-hero contact-hero">
         <p class="eyebrow">Contact SM Math Academy</p>
         <h1>Start with a quick conversation.</h1>
         <p>Reach out by email, phone, or the form below to discuss online or in-person math tutoring.</p>
