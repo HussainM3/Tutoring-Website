@@ -8,12 +8,12 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      HOME: /root
 
     # Run everything inside the official Playwright environment to skip browser downloads entirely!
     container:
       image: mcr.microsoft.com/playwright:v1.59.1-noble
-      env:
-        HOME: /root
 
     steps:
       - uses: actions/checkout@v4
