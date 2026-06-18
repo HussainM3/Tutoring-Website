@@ -9,21 +9,38 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: lts/*
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install chromium
       - name: Start PHP server
-        run: php -S localhost:8000 -t "tutoring site" > /dev/null 2>&1 &
+        run: php -S localhost:8000 -t "tutoring site" &
       - name: Run Playwright tests
         run: npx playwright test
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
+  # deploy ONLY if the tests pass successfully!
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' # Only deploy on actual code pushes, not pull requests
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync files to InfinityFree
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ftpupload.net # Change this if your FTP host is different
+          username: if0_12345678 # Swap this with your actual FTP username
+          password: ${{ secrets::FTP_PASSWORD }}
+          local-dir: ./tutoring site/ # Points to your PHP code folder
+          server-dir: /htdocs/ # InfinityFree requires files to live in htdocs
