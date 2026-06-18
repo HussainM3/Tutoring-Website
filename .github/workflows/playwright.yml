@@ -12,6 +12,8 @@ jobs:
     # Run everything inside the official Playwright environment to skip browser downloads entirely!
     container:
       image: mcr.microsoft.com/playwright:v1.59.1-noble
+      env:
+        HOME: /root
 
     steps:
       - uses: actions/checkout@v4
@@ -23,7 +25,7 @@ jobs:
       # - name: Install Playwright Browsers
       #   run: npx playwright install chromium
       - name: Start PHP server
-        run: php -S localhost:8000 -t "tutoring site" &
+        run: php -S 0.0.0.0:8000 -t "tutoring site" &
       # Give the background PHP server 2 seconds to initialize inside the container
       - name: Sleep for initialization
         run: sleep 2
