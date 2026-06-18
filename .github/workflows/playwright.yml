@@ -41,6 +41,6 @@ jobs:
         with:
           server: ftpupload.net
           username: if0_42216136
-          password: ${{ secrets::FTP_PASSWORD }}
+          password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./tutoring site/ # Points to your PHP code folder
           server-dir: /htdocs/ # InfinityFree requires files to live in htdocs
