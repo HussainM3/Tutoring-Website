@@ -39,8 +39,8 @@ jobs:
       - name: Sync files to InfinityFree
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ftpupload.net # Change this if your FTP host is different
-          username: if0_12345678 # Swap this with your actual FTP username
+          server: ftpupload.net
+          username: if0_42216136
           password: ${{ secrets::FTP_PASSWORD }}
           local-dir: ./tutoring site/ # Points to your PHP code folder
           server-dir: /htdocs/ # InfinityFree requires files to live in htdocs
