@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('form validation', async ({ page }) => {
-    await page.goto('http://127.0.0.1:8000/contact.php');
+    await page.goto('http://localhost:8000/contact.php');
 
     // 1. Validation Check
     await page.getByRole('button', { name: 'Send Email' }).click();

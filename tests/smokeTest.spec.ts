@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('homepage smoke test', async ({ page }) => {
   // 1. Go to local PHP server 
-  await page.goto('http://127.0.0.1:8000');
+  await page.goto('http://localhost:8000');
 
   // 2. Check the "Spine of the book" (Browser Tab)
   await expect(page).toHaveTitle(/SM Math Academy/);
@@ -13,7 +13,7 @@ test('homepage smoke test', async ({ page }) => {
 });
 
 test('contact page loads correctly', async ({ page }) => {
-  await page.goto('http://127.0.0.1:8000/contact.php');
+  await page.goto('http://localhost:8000/contact.php');
 
   // Verify the form is actually there
   // Using 'role' is much better than checking for "bold" or CSS classes
