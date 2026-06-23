@@ -23,8 +23,8 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: |
-          npx playwright install-deps
-          PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 npx playwright install chromium firefox webkit
+          npx PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 npx playwright install chromium firefox webkit
+          npx PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 npx playwright install-deps
       - name: Start PHP server
         run: php -S localhost:8000 -t "tutoring site" &
       # Give the background PHP server 2 seconds to initialize inside the container
