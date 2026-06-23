@@ -8,6 +8,12 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
+    # # Run everything inside the official Playwright environment to skip browser downloads entirely!
+    # container:
+    #   image: mcr.microsoft.com/playwright:v1.59.1-noble
+    #   options: --network host
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -19,6 +25,9 @@ jobs:
         run: npx playwright install --with-deps chromium firefox webkit
       - name: Start PHP server
         run: php -S localhost:8000 -t "tutoring site" &
+      # Give the background PHP server 2 seconds to initialize inside the container
+      - name: Sleep for initialization
+        run: sleep 2
       - name: Run Playwright tests
         run: npx playwright test
       - uses: actions/upload-artifact@v4
@@ -27,3 +36,20 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
+  # deploy ONLY if the tests pass successfully!
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' # Only deploy on actual code pushes, not pull requests
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync files to InfinityFree
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ftpupload.net
+          username: if0_42216136
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./tutoring site/ # Points to your PHP code folder
+          server-dir: /htdocs/ # InfinityFree requires files to live in htdocs
