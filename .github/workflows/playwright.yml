@@ -7,7 +7,7 @@ on:
 jobs:
   test:
     timeout-minutes: 60
-    runs-on: ubuntu-latest
+    runs-on: ubuntu24.04-x64
 
     # # Run everything inside the official Playwright environment to skip browser downloads entirely!
     # container:
