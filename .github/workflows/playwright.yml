@@ -26,9 +26,8 @@ jobs:
           PLAYWRIGHT_HOST_PLATFORM_OVERRIDE: ubuntu24.04-x64
           DEBIAN_FRONTEND: noninteractive
         run: |
-          sudo apt-get update
-          npx playwright install-deps
-          npx playwright install firefox webkit
+          set -euxo pipefail
+          npx playwright install --with-deps --verbose
       - name: Start PHP server
         run: php -S localhost:8000 -t "tutoring site" &
       # Give the background PHP server 2 seconds to initialize inside the container
