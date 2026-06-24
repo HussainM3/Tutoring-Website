@@ -19,6 +19,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
+      - name: Clear Playwright cache
+        run: rm -rf ~/.cache/ms-playwright
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
@@ -26,8 +28,9 @@ jobs:
           PLAYWRIGHT_HOST_PLATFORM_OVERRIDE: ubuntu24.04-x64
           DEBIAN_FRONTEND: noninteractive
         run: |
-          set -euxo pipefail
-          npx playwright install --with-deps --verbose
+          sudo apt-get update
+          npx playwright install-deps
+          npx playwright install chromium firefox webkit
       - name: Start PHP server
         run: php -S localhost:8000 -t "tutoring site" &
       # Give the background PHP server 2 seconds to initialize inside the container
