@@ -32,7 +32,15 @@ jobs:
       #     npx playwright install-deps
       #     npx playwright install chromium firefox webkit
       - name: Start PHP server
-        run: php -S localhost:8000 -t "tutoring site" &
+        run: php -S localhost:8000 -t "tutoring\ site" &
+      - name: Wait for server
+        run: |
+          for i in {1..30}; do
+            curl -s http://localhost:8000 && exit 0
+            sleep 1
+          done
+          echo "Server failed to start"
+          exit 1
       - name: Run Playwright tests
         run: npx playwright test
       - uses: actions/upload-artifact@v4
