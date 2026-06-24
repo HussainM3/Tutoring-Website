@@ -26,8 +26,8 @@ jobs:
 
       - name: Install PHP
         run: |
-          sudo apt-get update
-          sudo apt-get install -y php-cli
+          apt-get update
+          apt-get install -y php-cli
       # - name: Install Playwright Browsers
       #   env:
       #     PLAYWRIGHT_HOST_PLATFORM_OVERRIDE: ubuntu24.04-x64
