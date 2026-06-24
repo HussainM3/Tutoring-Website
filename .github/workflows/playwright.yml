@@ -9,33 +9,30 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-24.04
 
-    # # Run everything inside the official Playwright environment to skip browser downloads entirely!
-    # container:
-    #   image: mcr.microsoft.com/playwright:v1.59.1-noble
-    #   options: --network host
+    # Run everything inside the official Playwright environment to skip browser downloads entirely!
+    container:
+      image: mcr.microsoft.com/playwright:v1.59.1-noble
+      options: --network host
 
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
-      - name: Clear Playwright cache
-        run: rm -rf ~/.cache/ms-playwright
-      - name: Install dependencies
-        run: npm ci
-      - name: Install Playwright Browsers
-        env:
-          PLAYWRIGHT_HOST_PLATFORM_OVERRIDE: ubuntu24.04-x64
-          DEBIAN_FRONTEND: noninteractive
-        run: |
-          sudo apt-get update
-          npx playwright install-deps
-          npx playwright install chromium firefox webkit
+      # - name: Clear Playwright cache
+      #   run: rm -rf ~/.cache/ms-playwright
+      # - name: Install dependencies
+      #   run: npm ci
+      # - name: Install Playwright Browsers
+      #   env:
+      #     PLAYWRIGHT_HOST_PLATFORM_OVERRIDE: ubuntu24.04-x64
+      #     DEBIAN_FRONTEND: noninteractive
+      #   run: |
+      #     sudo apt-get update
+      #     npx playwright install-deps
+      #     npx playwright install chromium firefox webkit
       - name: Start PHP server
         run: php -S localhost:8000 -t "tutoring site" &
-      # Give the background PHP server 2 seconds to initialize inside the container
-      - name: Sleep for initialization
-        run: sleep 2
       - name: Run Playwright tests
         run: npx playwright test
       - uses: actions/upload-artifact@v4
