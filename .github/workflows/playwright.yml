@@ -23,6 +23,11 @@ jobs:
       #   run: rm -rf ~/.cache/ms-playwright
       - name: Install dependencies
         run: npm ci
+
+      - name: Install PHP
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y php-cli
       # - name: Install Playwright Browsers
       #   env:
       #     PLAYWRIGHT_HOST_PLATFORM_OVERRIDE: ubuntu24.04-x64
@@ -32,7 +37,7 @@ jobs:
       #     npx playwright install-deps
       #     npx playwright install chromium firefox webkit
       - name: Start PHP server
-        run: php -S localhost:8000 -t "tutoring\ site" &
+        run: php -S localhost:8000 -t "tutoring site" &
       - name: Wait for server
         run: |
           for i in {1..30}; do
