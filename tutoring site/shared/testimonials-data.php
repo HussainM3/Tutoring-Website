@@ -1,16 +1,22 @@
 <?php
-// TO-DO: Update with real testimonials from families
+
 $testimonials = [
     [
-        'name' => 'Sarah M. (Parent)',
-        'grade' => 'Grade 11 Functions',
-        'text' => 'Unbelievable improvement. The unit breakdowns really helped my son organize his exam prep.',
+        'name' => 'Parent',
+        'grade' => 'Grade 5',
+        'text' => 'You have done an incredible job helping the kids build both their interest and confidence in math.',
         'featured' => true
     ],
     [
-        'name' => 'Jason T. (Student)',
-        'grade' => 'Grade 9 Math',
-        'text' => 'The coding modules in the algebra unit actually made sense for the first time.',
+        'name' => 'Student',
+        'grade' => 'Grade 6',
+        'text' => 'Jazakullah for teaching me [You are] so kind.',
+        'featured' => true
+    ],
+    [
+        'name' => 'Parent',
+        'grade' => 'Grade 5',
+        'text' => 'You always push [Student] to do his best and do the right thing.',
         'featured' => false
-    ]
+    ]   
 ];
